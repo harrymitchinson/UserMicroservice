@@ -8,15 +8,29 @@ import { Response, Request, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
 import { JWT_SECRET } from "./../../app.constants";
 
+// Add the user object to express request interface.
 declare module "express" {
   interface Request {
     user: any;
   }
 }
 
+/**
+ * Request authorization middleware.
+ * @export
+ * @class AuthMiddleware
+ * @implements {NestMiddleware}
+ */
 @Middleware()
 export class AuthMiddleware implements NestMiddleware {
-  private getTokenFromHeader(req: Request) {
+  /**
+   * Gets the authorization token from the request header.
+   * @private
+   * @param {Request} req
+   * @returns
+   * @memberof AuthMiddleware
+   */
+  private getTokenFromHeader(req: Request): string {
     const authorization = req.headers.authorization;
     if (authorization === undefined) {
       throw new UnauthorizedException("No authorization token was found.");
@@ -38,6 +52,13 @@ export class AuthMiddleware implements NestMiddleware {
     return token;
   }
 
+  /**
+   * Verifies the auth token from the request header.
+   * @private
+   * @param {string} token
+   * @returns
+   * @memberof AuthMiddleware
+   */
   private verifyToken(token: string) {
     try {
       const verifiedToken = verify(token, JWT_SECRET);
@@ -47,6 +68,11 @@ export class AuthMiddleware implements NestMiddleware {
     }
   }
 
+  /**
+   * Verifies the auth token from the request header and assigns it to the request user.
+   * @returns {ExpressMiddleware}
+   * @memberof AuthMiddleware
+   */
   resolve(): ExpressMiddleware {
     return (req: Request, res: Response, next: NextFunction) => {
       try {

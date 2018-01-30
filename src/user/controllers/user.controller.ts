@@ -15,6 +15,13 @@ import { UpdateUserResult } from "../services/user.service";
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  /**
+   * Update an existing user's profile.
+   * @param {RequestUser} user
+   * @param {UpdateProfileDto} updateProfile
+   * @returns {Promise<UpdateUserResult>}
+   * @memberof UserController
+   */
   @Put("profile")
   @HttpCode(HttpStatus.OK)
   public async updateProfile(
@@ -35,6 +42,13 @@ export class UserController {
     }
   }
 
+  /**
+   * Change an existing user's password.
+   * @param {RequestUser} user
+   * @param {ChangePasswordDto} changePassword
+   * @returns {Promise<UpdateUserResult>}
+   * @memberof UserController
+   */
   @Put("password")
   @HttpCode(HttpStatus.OK)
   public async changePassword(

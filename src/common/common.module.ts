@@ -6,12 +6,13 @@ import {
   Logger
 } from "@nestjs/common";
 import { LoggerMiddleware } from "./middlewares";
-
-@Module({
-  imports: [],
-  controllers: [],
-  components: []
-})
+/**
+ * Common module which contains useful utilities.
+ * @export
+ * @class CommonModule
+ * @implements {NestModule}
+ */
+@Module({})
 export class CommonModule implements NestModule {
   public configure(consumer: MiddlewaresConsumer): void {
     consumer

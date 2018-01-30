@@ -7,16 +7,16 @@ describe("Main", () => {
   describe("bootstrap", () => {
     let mockApp: any;
 
-    beforeAll(() => {
-      // Arrange
-      mockApp = {
-        useGlobalPipes: jest.fn(),
-        setGlobalPrefix: jest.fn(),
-        listen: jest.fn()
-      };
+    // Arrange
+    mockApp = {
+      useGlobalPipes: jest.fn(),
+      setGlobalPrefix: jest.fn(),
+      listen: jest.fn()
+    };
 
+    beforeAll(async () => {
       // Act
-      const app = bootstrap(mockApp);
+      const app = await bootstrap(mockApp);
     });
 
     describe("useGlobalPipes", () => {

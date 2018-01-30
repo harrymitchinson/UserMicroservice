@@ -3,6 +3,12 @@ import { NextFunction, Request, Response } from "express";
 import chalk from "chalk";
 import { Middleware, NestMiddleware, ExpressMiddleware } from "@nestjs/common";
 
+/**
+ * Request logging middleware.
+ * @export
+ * @class LoggerMiddleware
+ * @implements {NestMiddleware}
+ */
 @Middleware()
 export class LoggerMiddleware implements NestMiddleware {
   private template = "[%%] %% [%%]";

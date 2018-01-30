@@ -7,6 +7,12 @@ import {
   comparePassword
 } from "./user.schema.helpers";
 
+/**
+ * The mongoose user document.
+ * @export
+ * @interface User
+ * @extends {Document}
+ */
 export interface User extends Document {
   username: string;
   password: string;
@@ -18,6 +24,7 @@ export interface User extends Document {
   comparePassword(password: string): Promise<boolean>;
 }
 
+// The mongoose user schema definition.
 const definition: SchemaDefinition = {
   username: { type: String, unique: true, lowercase: true, trim: true },
   password: { type: String },
@@ -27,6 +34,7 @@ const definition: SchemaDefinition = {
   modified: Date
 };
 
+// Create the user schema using the user schema definition and add hooks and methods.
 export const UserSchema = new Schema(definition)
   .pre("save", hashPassword)
   .pre("save", updateModified)

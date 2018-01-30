@@ -8,6 +8,12 @@ const IMPORTS = [DatabaseModule];
 const COMPONENTS = [UserProvider, UserService, AuthService];
 const CONTROLLERS = [UserController, AuthContoller];
 
+/**
+ * The user module.
+ * @export
+ * @class UserModule
+ * @implements {NestModule}
+ */
 @Module({ imports: IMPORTS, components: COMPONENTS, controllers: CONTROLLERS })
 export class UserModule implements NestModule {
   public configure(consumer: MiddlewaresConsumer): void {

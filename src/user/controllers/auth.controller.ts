@@ -18,7 +18,12 @@ export class AuthContoller {
     private readonly userService: UserService,
     private readonly authService: AuthService
   ) {}
-
+  /**
+   * Create a new user and generate the user an auth token.
+   * @param {CreateDto} dto
+   * @returns {Promise<AuthTokenResult>}
+   * @memberof AuthContoller
+   */
   @Post("new")
   @HttpCode(HttpStatus.CREATED)
   public async new(@Body() dto: CreateDto): Promise<AuthTokenResult> {
@@ -36,6 +41,12 @@ export class AuthContoller {
     }
   }
 
+  /**
+   * Authorize an existing user and generate the user an auth token.
+   * @param {AuthorizeDto} dto
+   * @returns {Promise<AuthTokenResult>}
+   * @memberof AuthContoller
+   */
   @Post()
   @HttpCode(HttpStatus.OK)
   public async authorize(@Body() dto: AuthorizeDto): Promise<AuthTokenResult> {
@@ -53,6 +64,12 @@ export class AuthContoller {
     }
   }
 
+  /**
+   * Check whether a user exists for the provided username.
+   * @param {string} username
+   * @returns {Promise<ExistingUserResult>}
+   * @memberof AuthContoller
+   */
   @Post("exists")
   @HttpCode(HttpStatus.OK)
   public async checkIfExists(

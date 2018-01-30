@@ -5,6 +5,11 @@ import { UpdateProfileDto, ChangePasswordDto, CreateDto } from "./../dto";
 import { AuthorizeDto } from "./../dto/authorize.dto";
 import { USER_MODEL_TOKEN } from "./../../app.constants";
 
+/**
+ * The existing user result.
+ * @export
+ * @class ExistingUserResult
+ */
 export class ExistingUserResult {
   public existing: boolean;
   public constructor(existing: boolean) {
@@ -12,6 +17,11 @@ export class ExistingUserResult {
   }
 }
 
+/**
+ * The updated user result.
+ * @export
+ * @class UpdateUserResult
+ */
 export class UpdateUserResult {
   public updated: boolean;
   public constructor(updated: boolean) {
@@ -19,12 +29,22 @@ export class UpdateUserResult {
   }
 }
 
+/**
+ *
+ * @export
+ * @class UserService
+ */
 @Component()
 export class UserService {
   constructor(
     @Inject(USER_MODEL_TOKEN) private readonly userModel: Model<User>
   ) {}
-
+  /**
+   * Finds the user in the database by their unique identifier.
+   * @param {string} id
+   * @returns {Promise<User>}
+   * @memberof UserService
+   */
   public async findByUserId(id: string): Promise<User> {
     // Create the query for finding the user.
     const query = this.userModel.findById(id);
@@ -40,7 +60,12 @@ export class UserService {
     // Return the user.
     return user;
   }
-
+  /**
+   * Creates a new user in the database.
+   * @param {CreateDto} dto
+   * @returns {Promise<User>}
+   * @memberof UserService
+   */
   public async create(dto: CreateDto): Promise<User> {
     try {
       // Create the query for creating the user.
@@ -57,6 +82,12 @@ export class UserService {
     }
   }
 
+  /**
+   * Verifies a user by confirming their provided password with their actual password.
+   * @param {AuthorizeDto} dto
+   * @returns {Promise<User>}
+   * @memberof UserService
+   */
   public async verify(dto: AuthorizeDto): Promise<User> {
     // Create the query for finding the user.
     const query = this.userModel.find({ username: dto.username }).limit(1);
@@ -84,6 +115,13 @@ export class UserService {
     return user;
   }
 
+  /**
+   * Updates a user's profile.
+   * @param {string} id
+   * @param {UpdateProfileDto} dto
+   * @returns {Promise<UpdateUserResult>}
+   * @memberof UserService
+   */
   public async updateProfile(
     id: string,
     dto: UpdateProfileDto
@@ -112,6 +150,12 @@ export class UserService {
     return result;
   }
 
+  /**
+   * Checks if a user already exists using the provided username.
+   * @param {string} username
+   * @returns {Promise<ExistingUserResult>}
+   * @memberof UserService
+   */
   public async checkIfExists(username: string): Promise<ExistingUserResult> {
     // Create the query for finding the users.
     const query = this.userModel.find({ username: username }).limit(1);
@@ -131,6 +175,14 @@ export class UserService {
     return result;
   }
 
+  /**
+   * Verifies a user by comparing their provided password and actual password,
+   * then changes their password to the new provided password.
+   * @param {string} id
+   * @param {ChangePasswordDto} dto
+   * @returns {Promise<UpdateUserResult>}
+   * @memberof UserService
+   */
   public async changePassword(
     id: string,
     dto: ChangePasswordDto

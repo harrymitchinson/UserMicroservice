@@ -1,3 +1,3 @@
-# user-microservice
+# UserMicroservice
 
-User microservice with authentication built using NestJS.
+User microservice with authentication. Built using NestJS.
