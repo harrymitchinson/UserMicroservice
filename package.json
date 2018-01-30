@@ -1,0 +1,71 @@
+{
+  "name": "user-microservice",
+  "version": "1.0.0",
+  "description": "User microservice with authentication built using NestJS",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "start:watch": "nodemon",
+    "prestart:prod": "tsc",
+    "start:prod": "node dist/main.js",
+    "test": "jest --forceExit --coverage",
+    "test:watch": "jest --watch",
+    "e2e": "jest --config=e2e/jest-e2e.json --forceExit",
+    "e2e:watch": "jest --watch --config=e2e/jest-e2e.json"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "/src/.*\\.(spec).(ts|tsx|js)$",
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,tsx,ts}",
+      "!**/node_modules/**",
+      "!**/vendor/**"
+    ],
+    "mapCoverage": true,
+    "coverageReporters": [
+      "json",
+      "lcov"
+    ]
+  },
+  "dependencies": {
+    "@nestjs/common": "^4.5.9",
+    "@nestjs/core": "^4.5.10",
+    "@nestjs/microservices": "^4.5.8",
+    "@nestjs/testing": "^4.5.5",
+    "@nestjs/websockets": "^4.5.8",
+    "bcrypt": "^1.0.3",
+    "chalk": "^2.3.0",
+    "class-validator": "^0.8.1",
+    "jsonwebtoken": "^8.1.1",
+    "mongoose": "^5.0.1",
+    "redis": "^2.8.0",
+    "reflect-metadata": "^0.1.12",
+    "rxjs": "^5.5.6",
+    "typescript": "^2.6.2"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^1.0.0",
+    "@types/express": "^4.11.0",
+    "@types/jest": "^22.1.0",
+    "@types/jsonwebtoken": "^7.2.5",
+    "@types/mongoose": "^5.0.0",
+    "@types/node": "^9.4.0",
+    "@types/supertest": "^2.0.4",
+    "jest": "^22.1.4",
+    "mockgoose-fix": "^7.3.6",
+    "mongoose-model-mock": "^1.4.0",
+    "nodemon": "^1.14.11",
+    "supertest": "^3.0.0",
+    "ts-jest": "^22.0.1",
+    "ts-node": "^4.1.0",
+    "tslint": "^5.9.1"
+  }
+}

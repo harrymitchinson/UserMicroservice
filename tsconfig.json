@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": false,
+    "noImplicitAny": true,
+    "removeComments": false,
+    "noLib": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es2017",
+    "types": ["node", "reflect-metadata"],
+    "sourceMap": true,
+    "strict": true,
+    "allowJs": false,
+    "outDir": "./dist"
+  },
+  "include": ["src/*", "src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
